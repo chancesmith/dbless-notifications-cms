@@ -1,4 +1,4 @@
-// create the module and name it headphonesApp
+// create the module and name it notificationsApp
 var dbless = angular.module('dbless', ['ngRoute']);
 
 // configure our routes
@@ -26,50 +26,34 @@ function generateUUID(){
 }
 
 dbless.service('mainController', function ($http) {
-    var contacts = '';
-    $http.get('jobs.json').success(function(data) {
-        contacts = data;
+    var notifications = '';
+    $http.get('notifications.json').success(function(data) {
+        notifications = data;
     });
     
-    // contacts array to hold list of all contacts
-    // var contacts = [
-	   //  {
-	   //      id: 0,
-	   //      'name': 'Director, Ethical Hacking',
-	   //      'email': 'Helps financial institutions identify the vulnerabilities of their Web applications and networks',
-	   //      'phone': 'As DEH, you will be...'
-	   //  },
-	   //  {
-	   //      id: 1,
-	   //      'name': 'Master of Disaster',
-	   //      'email': 'Helps federal, state, and local authorities access the information they need to recover quickly from calamities.',
-	   //      'phone': 'As MoD, you will be...'
-	   //  }
-    // ];
-    
-    //save method create a new contact if not already exists
+    //save method create a new notification if not already exists
     //else update the existing object
-    this.save = function (contact) {
-    	if (contact.id == null) {
-            //if this is new contact, add it in contacts array
-            contact.id = generateUUID();
-            contacts.push(contact);
-            console.log('New contact');
+    this.save = function (notification) {
+    	if (notification.id == null) {
+            //if this is new notification, add it in notifications array
+            notification.id = generateUUID();
+            notifications.push(notification);
+            console.log('New notification');
         } else {
-            //for existing contact, find this contact using id
+            //for existing notification, find this notification using id
             //and update it.
-            console.log('Existing contact');
-            for (i in contacts) {
-            	if (contacts[i].id == contact.id) {
-            		contacts[i] = contact;
+            console.log('Existing notification');
+            for (i in notifications) {
+            	if (notifications[i].id == notification.id) {
+            		notifications[i] = notification;
             	}
             }
         }
-        // var jsonData = JSON.stringify(contacts);
+        // var jsonData = JSON.stringify(notifications);
         $http({
           method: 'POST',
           url: 'update-json.php',
-          data: contacts
+          data: notifications
         }).then(function successCallback(response) {
             // this callback will be called asynchronously
             // when the response is available
@@ -81,29 +65,29 @@ dbless.service('mainController', function ($http) {
           });
     }
 
-    //simply search contacts list for given id
-    //and returns the contact object if found
+    //simply search notifications list for given id
+    //and returns the notification object if found
     this.get = function (id) {
-    	for (i in contacts) {
-    		if (contacts[i].id == id) {
-    			return contacts[i];
+    	for (i in notifications) {
+    		if (notifications[i].id == id) {
+    			return notifications[i];
     		}
     	}
 
     }
     
-    //iterate through contacts list and delete 
-    //contact if found
+    //iterate through notifications list and delete 
+    //notification if found
     this.delete = function (id) {
-    	for (i in contacts) {
-    		if (contacts[i].id == id) {
-    			contacts.splice(i, 1);
+    	for (i in notifications) {
+    		if (notifications[i].id == id) {
+    			notifications.splice(i, 1);
     		}
     	}
         $http({
           method: 'POST',
           url: 'update-json.php',
-          data: contacts
+          data: notifications
         }).then(function successCallback(response) {
             // this callback will be called asynchronously
             // when the response is available
@@ -115,24 +99,24 @@ dbless.service('mainController', function ($http) {
           });
     }
 
-    //iterate through contacts list and duplicate 
-    //contact if found
+    //iterate through notifications list and duplicate 
+    //notification if found
     this.duplicate = function (id) {
-        var cloneContact = '';
-        for (i in contacts) {
-            if (contacts[i].id == id) {
-                cloneContact = contacts[i];
-                console.log(cloneContact);
-                cloneContact.id = generateUUID();
-                contacts.push(cloneContact);
-                console.log(cloneContact);
-                console.log('Contact Duplicated');
+        var cloneNotification = '';
+        for (i in notifications) {
+            if (notifications[i].id == id) {
+                cloneNotification = notifications[i];
+                console.log(cloneNotification);
+                cloneNotification.id = generateUUID();
+                notifications.push(cloneNotification);
+                console.log(cloneNotification);
+                console.log('Notification Duplicated');
             }
         }
         $http({
           method: 'POST',
           url: 'update-json.php',
-          data: contacts
+          data: notifications
         }).then(function successCallback(response) {
             // this callback will be called asynchronously
             // when the response is available
@@ -144,32 +128,32 @@ dbless.service('mainController', function ($http) {
           });
     }
 
-    //simply returns the contacts list
+    //simply returns the notifications list
     this.list = function () {
-        return contacts;
+        return notifications;
     }
 });
 
 dbless.controller('mainController', function ($scope, mainController) {
 
-	$scope.contacts = mainController.list();
+	$scope.notifications = mainController.list();
 
-	$scope.saveContact = function () {
-		mainController.save($scope.newcontact);
-		$scope.newcontact = {};
+	$scope.saveNotification = function () {
+		mainController.save($scope.newnotification);
+		$scope.newnotification = {};
 	}
 
 	$scope.delete = function (id) {
 
 		mainController.delete(id);
-		if ($scope.newcontact.id == id) $scope.newcontact = {};
+		if ($scope.newnotification.id == id) $scope.newnotification = {};
 	}
 
 	$scope.edit = function (id) {
-		$scope.newcontact = angular.copy(mainController.get(id));
+		$scope.newnotification = angular.copy(mainController.get(id));
 	}
 
     $scope.duplicate = function (id) {
-        $scope.newcontact = angular.copy(mainController.duplicate(id));
+        $scope.newnotification = angular.copy(mainController.duplicate(id));
     }
 })

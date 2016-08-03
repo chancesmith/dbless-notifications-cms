@@ -1,47 +1,35 @@
 <div id="intro" class="container top">
-	<div class="row">
+	<div class="row">	
 		<div class="col-md-6">
-			<form class="well" ng-submit="saveContact()">
+			<form class="well" ng-submit="saveNotification()">
 				<div class="form-group">
 					<label>Text*</label>
-					<input type="text" class="form-control" name="name" ng-model="newcontact.name" required/>
+					<input type="text" class="form-control" name="text" ng-model="newnotification.text" required/>
 				</div>
 				<div class="form-group">
 					<label>Button Text</label>
-					<input type="text" class="form-control" name="email" ng-model="newcontact.email" />
+					<input type="text" class="form-control" name="btn" ng-model="newnotification.btn" />
 				</div>
 				<div class="form-group">
 					<label>URL</label>
-					<input type="text" class="form-control" name="phone" ng-model="newcontact.phone" />
+					<input type="text" class="form-control" name="url" ng-model="newnotification.url" />
 				</div>
 				<br/>
-				<input type="hidden" ng-model="newcontact.id" />
-				<input type="button" value="Save" ng-click="saveContact()" class="btn btn-primary" />
+				<input type="hidden" ng-model="newnotification.id" />
+				<input type="button" value="Save" ng-click="saveCotification()" class="btn btn-primary" />
 				<input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;"/>
 			</form>
 		</div>
-		<div class="col-md-6 content-block">
-			<table class="table table-striped table-bordered">
-				<thead>
-					<tr>
-						<th>Text</th>
-						<th>Button Text</th>
-						<th>URL</th>
-						<th>Action</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr ng-hide="!contacts.length" ng-repeat="contact in contacts">
-						<td>{{ contact.name }}</td>
-						<td>{{ contact.email }}</td>
-						<td>{{ contact.phone }}</td>
-						<td> <a href="javascript:void(0)" ng-click="edit(contact.id)"><i class="fa fa-pencil fa-lg success"></i></a><!--<a href="javascript:void(0)" ng-click="duplicate(contact.id)">dupe</a> --> &nbsp;<a href="javascript:void(0)" ng-click="delete(contact.id)"><i class="fa fa-trash fa-lg error"></i></a>
-
-						</td>
-					</tr>
-					<p ng-show="!contacts.length" class="error">Create a notifcation or Clear cache to see list. [command + shift + R]</p>
-				</tbody>
-			</table>
+		<div class="col-md-6" ng-hide="!notifications.length" ng-repeat="notification in notifications">
+			<div class="notification-box">
+				<div class="close-notification">X</div>
+				<div class="controls">
+					<a href="javascript:void(0)" ng-click="edit(notification.id)"><i class="fa fa-pencil fa-lg success"></i></a><!--<a href="javascript:void(0)" ng-click="duplicate(notification.id)">dupe</a> --> &nbsp;<a href="javascript:void(0)" ng-click="delete(notification.id)"><i class="fa fa-trash fa-lg error"></i></a>
+				</div>
+				<p ng-show="!notifications.length" class="error">Create a notifcation or Clear cache to see list. [command + shift + R]</p>
+				<p>{{ notification.text }}</p> <br>
+				<a href="{{ notification.url }}" class="btn btn-primary">{{ notification.btn }}</a>
+			</div>
 		</div>
 	</div>
 </div>

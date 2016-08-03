@@ -68,4 +68,4 @@ Adds post data to JSON file, all pretty like
 $postdata = file_get_contents("php://input");
 print_r($postdata);
 $postdata = indent($postdata);
-file_put_contents('./jobs.json', $postdata);
+file_put_contents('./notifications.json', $postdata);

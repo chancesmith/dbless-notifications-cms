@@ -70,6 +70,28 @@ body {
 /*******************
 ///Pages
 ********************/
+.notification-box {
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  padding: 25px 28px;
+  margin: 12px 85px;
+}
+.close-notification {
+  // position: absolute;
+  // top: 18px;
+  // right: 109px;
+  position: relative;
+  float: right;
+  padding: 0;
+  margin: -15px -14px;
+  color: #CCC;
+}
+.controls {
+  position: absolute;
+  bottom: 27px;
+  right: 116px;
+}
+
 /*******************
 ///Animations
 ********************/
