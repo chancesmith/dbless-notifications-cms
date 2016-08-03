@@ -3,15 +3,15 @@
 		<div class="col-md-6">
 			<form class="well" ng-submit="saveContact()">
 				<div class="form-group">
-					<label>Title*</label>
+					<label>Text*</label>
 					<input type="text" class="form-control" name="name" ng-model="newcontact.name" required/>
 				</div>
 				<div class="form-group">
-					<label>Responsibilities</label>
+					<label>Button Text</label>
 					<input type="text" class="form-control" name="email" ng-model="newcontact.email" />
 				</div>
 				<div class="form-group">
-					<label>Description</label>
+					<label>URL</label>
 					<input type="text" class="form-control" name="phone" ng-model="newcontact.phone" />
 				</div>
 				<br/>
@@ -24,9 +24,9 @@
 			<table class="table table-striped table-bordered">
 				<thead>
 					<tr>
-						<th>Title</th>
-						<th>Responsibilities</th>
-						<th>Description</th>
+						<th>Text</th>
+						<th>Button Text</th>
+						<th>URL</th>
 						<th>Action</th>
 					</tr>
 				</thead>
@@ -39,7 +39,7 @@
 
 						</td>
 					</tr>
-					<p ng-show="!contacts.length" class="error">Create jobs or Clear cache to see list. [command + shift + R]</p>
+					<p ng-show="!contacts.length" class="error">Create a notifcation or Clear cache to see list. [command + shift + R]</p>
 				</tbody>
 			</table>
 		</div>
