@@ -38,7 +38,7 @@ dbless.service('mainController', function ($http) {
             //if this is new notification, add it in notifications array
             notification.id = generateUUID();
             notifications.push(notification);
-            console.log('New notification');
+            console.log('New notifications'+notifications.length);
         } else {
             //for existing notification, find this notification using id
             //and update it.
@@ -144,7 +144,6 @@ dbless.controller('mainController', function ($scope, mainController) {
 	}
 
 	$scope.delete = function (id) {
-
 		mainController.delete(id);
 		if ($scope.newnotification.id == id) $scope.newnotification = {};
 	}

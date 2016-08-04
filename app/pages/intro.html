@@ -7,28 +7,39 @@
 					<input type="text" class="form-control" name="text" ng-model="newnotification.text" required/>
 				</div>
 				<div class="form-group">
+					<label>Need a button?</label>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" id="buttons" name="buttons" ng-model="notifications.buttonBolean" />
+							Yes
+						</label>
+					</div>
+				</div>
+				<div class="form-group" ng-show="notifications.buttonBolean">
 					<label>Button Text</label>
 					<input type="text" class="form-control" name="btn" ng-model="newnotification.btn" />
 				</div>
-				<div class="form-group">
+				<div class="form-group" ng-show="notifications.buttonBolean">
 					<label>URL</label>
 					<input type="text" class="form-control" name="url" ng-model="newnotification.url" />
 				</div>
 				<br/>
 				<input type="hidden" ng-model="newnotification.id" />
-				<input type="button" value="Save" ng-click="saveCotification()" class="btn btn-primary" />
+				<input type="button" value="Save" ng-click="saveNotification()" class="btn btn-primary" />
 				<input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;"/>
 			</form>
 		</div>
-		<div class="col-md-6" ng-hide="!notifications.length" ng-repeat="notification in notifications">
-			<div class="notification-box">
+
+		<p ng-show="!notifications.length" class="error">Create a notifcation or Clear cache to see list. [command + shift + R]</p>
+		<div class="col-md-6">
+			<div class="notification-box" ng-hide="!notifications.length" ng-repeat="notification in notifications"
+			>
 				<div class="close-notification">X</div>
 				<div class="controls">
 					<a href="javascript:void(0)" ng-click="edit(notification.id)"><i class="fa fa-pencil fa-lg success"></i></a><!--<a href="javascript:void(0)" ng-click="duplicate(notification.id)">dupe</a> --> &nbsp;<a href="javascript:void(0)" ng-click="delete(notification.id)"><i class="fa fa-trash fa-lg error"></i></a>
 				</div>
-				<p ng-show="!notifications.length" class="error">Create a notifcation or Clear cache to see list. [command + shift + R]</p>
 				<p>{{ notification.text }}</p> <br>
-				<a href="{{ notification.url }}" class="btn btn-primary">{{ notification.btn }}</a>
+				<a ng-show="notification.url != null || notification.btn != null" href="{{ notification.url }}" class="btn btn-primary">{{ notification.btn }}</a>
 			</div>
 		</div>
 	</div>

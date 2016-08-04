@@ -1,14 +1,8 @@
-<?php
-$fileJSON = file_get_contents("notifications.json");
-$notifications = json_decode( $fileJSON, true );
-?>
-
-
 <!DOCTYPE html>
 <head>
 	<meta charset="utf-8">
 
-	<title>Notification with PHP | DBless</title>
+	<title>Notification with Javascript | DBless</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<!-- fonts -->
@@ -71,20 +65,6 @@ $notifications = json_decode( $fileJSON, true );
 			</div>
 		</div>
 	</div>
-	<?php if ($notifications != '' || isset($notifications)): ?>
-			<?php foreach($notifications as $notification) { //foreach element in job list ?>
-				<div class="notification-box">
-				<span id="close"><i class="fa fa-times"></i></span>
-					<p><?php echo $notification['text']; ?><p>
-					<?php if ( !$notification['url'] !== "" && $notification['button'] !== "" ) :?>
-						<a class="btn btn-primary" href="<?php echo $notification['url']; ?>"><?php echo $notification['btn']; ?></a>
-					<?php endif; ?>
-				</div>
-			<?php } ?>
-		<?php else: ?>
-			<div class="notification-box">
-				<h2>Sorry, no career opportunities are avilable at this time. Come back later to see future udpates.</h2>
-			</div>
-		<?php endif ?>
+	
 </body>
 </html>

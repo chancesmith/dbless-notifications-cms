@@ -41,9 +41,10 @@ body {
   margin: 4px 0 0 0; }
 
 .btn-primary {
-  color: #357ebd;
+  color: #fff;
   background-color: initial;
-  border-color: #357ebd;
+  border-color: #c05e48;
+  background-color: #c05e48;
   padding: 9px 12px; }
 
 .btn-primary:hover {
@@ -74,12 +75,11 @@ body {
   border: 1px solid #ccc;
   border-radius: 3px;
   padding: 25px 28px;
-  margin: 12px 85px;
+  margin: 0 85px;
+  border-color: #357ebd;
+  border-radius: 5px;
 }
 .close-notification {
-  // position: absolute;
-  // top: 18px;
-  // right: 109px;
   position: relative;
   float: right;
   padding: 0;
@@ -87,9 +87,9 @@ body {
   color: #CCC;
 }
 .controls {
-  position: absolute;
-  bottom: 27px;
-  right: 116px;
+  position: relative;
+  bottom: -64px;
+  right: -320px;
 }
 
 /*******************
