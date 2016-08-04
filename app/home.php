@@ -72,19 +72,19 @@ $notifications = json_decode( $fileJSON, true );
 		</div>
 	</div>
 	<?php if ($notifications != '' || isset($notifications)): ?>
-			<?php foreach($notifications as $notification) { //foreach element in job list ?>
-				<div class="notification-box">
-				<span id="close"><i class="fa fa-times"></i></span>
-					<p><?php echo $notification['text']; ?><p>
-					<?php if ( !$notification['url'] !== "" && $notification['button'] !== "" ) :?>
-						<a class="btn btn-primary" href="<?php echo $notification['url']; ?>"><?php echo $notification['btn']; ?></a>
-					<?php endif; ?>
-				</div>
-			<?php } ?>
-		<?php else: ?>
+		<?php foreach($notifications as $notification) { //foreach element in job list ?>
 			<div class="notification-box">
-				<h2>Sorry, no career opportunities are avilable at this time. Come back later to see future udpates.</h2>
+				<span id="close"><i class="fa fa-times"></i></span>
+				<p><?php echo $notification['text']; ?><p>
+				<?php if ( !$notification['url'] !== "" && $notification['button'] !== "" ) :?>
+					<a class="btn btn-primary" href="<?php echo $notification['url']; ?>"><?php echo $notification['btn']; ?></a>
+				<?php endif; ?>
 			</div>
-		<?php endif ?>
+		<?php } ?>
+	<?php else: ?>
+		<div class="notification-box">
+			<h2>Sorry, no career opportunities are avilable at this time. Come back later to see future udpates.</h2>
+		</div>
+	<?php endif ?>
 </body>
 </html>
