@@ -88,8 +88,7 @@ body {
 }
 .controls {
   position: relative;
-  bottom: -64px;
-  right: -320px;
+  top: -10px;
 }
 
 /*******************

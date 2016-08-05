@@ -58,6 +58,7 @@ $notifications = json_decode( $fileJSON, true );
 			margin: -13px -3px 0 0;
 			font-size: 16px;
 			opacity: 0.4;
+			cursor: pointer;
 		}
 	</style>
 
@@ -71,6 +72,7 @@ $notifications = json_decode( $fileJSON, true );
 			</div>
 		</div>
 	</div>
+	<?php $cookieValuePHP = ""; ?>
 	<?php if ($notifications != '' || isset($notifications)): ?>
 		<?php foreach($notifications as $notification) { //foreach element in job list ?>
 			<div class="notification-box">
@@ -80,11 +82,86 @@ $notifications = json_decode( $fileJSON, true );
 					<a class="btn btn-primary" href="<?php echo $notification['url']; ?>"><?php echo $notification['btn']; ?></a>
 				<?php endif; ?>
 			</div>
+			<?php $cookieValuePHP = $notification['editDate']; ?>
 		<?php } ?>
 	<?php else: ?>
 		<div class="notification-box">
 			<h2>Sorry, no career opportunities are avilable at this time. Come back later to see future udpates.</h2>
 		</div>
 	<?php endif ?>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script>
+		// vars
+		var cookieName = "companyNotification";
+		var cookieValue = "<?php echo $cookieValuePHP; ?>"; //php inputs last editDate
+		var daysUntilExpired = 3; // num of days
+
+		// cookie logic
+		function createCookie(name,value,days) {
+			if (days) {
+				var date = new Date();
+				date.setTime(date.getTime()+(days*24*60*60*1000));
+				var expires = "; expires="+date.toUTCString();
+			}
+			else var expires = "";
+			document.cookie = name+"="+value+expires+"; path=/";
+		}
+
+		function readCookie(name) {
+			var nameEQ = name + "=";
+			var ca = document.cookie.split(';');
+			for(var i=0;i < ca.length;i++) {
+				var c = ca[i];
+				while (c.charAt(0)==' ') c = c.substring(1,c.length);
+				if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+			}
+			return null;
+		}
+
+		function eraseCookie(name) {
+			createCookie(name,"",-1);
+		}
+
+		function getCookie(name) {
+			var dc = document.cookie;
+			var prefix = name + "=";
+			var begin = dc.indexOf("; " + prefix);
+			if (begin == -1) {
+				begin = dc.indexOf(prefix);
+				if (begin != 0) return null;
+			}
+			else
+			{
+				begin += 2;
+				var end = document.cookie.indexOf(";", begin);
+				if (end == -1) {
+					end = dc.length;
+				}
+			}
+			return unescape(dc.substring(begin + prefix.length, end));
+		}
+
+		// check if needs to show notify-box
+		var notificationCookie = getCookie(cookieName);
+
+		if (notificationCookie == null) {
+      // cookie doesn't exist
+      // show notification box
+			$('.notification-box').show();
+    }
+    else {
+      // cookie exists + not expired
+      // do nothing
+    }
+
+    // close notification box click
+		$('.notification-box span#close').click(function() {
+			// hide notification
+			$('.notification-box').hide();
+			// set cookie
+			createCookie(cookieName,cookieValue,daysUntilExpired);
+		});
+	</script>
 </body>
 </html>

@@ -34,11 +34,16 @@ dbless.service('mainController', function ($http) {
     //save method create a new notification if not already exists
     //else update the existing object
     this.save = function (notification) {
+        // add edit date
+        // var d = new Date();
+        var d = moment().format('MMMM Do YYYY, h:mm:ss a');
+        notification.editDate = d;
+
     	if (notification.id == null) {
             //if this is new notification, add it in notifications array
             notification.id = generateUUID();
             notifications.push(notification);
-            console.log('New notifications'+notifications.length);
+            console.log('New notification'+notifications.length);
         } else {
             //for existing notification, find this notification using id
             //and update it.
