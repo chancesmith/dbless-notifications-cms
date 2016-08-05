@@ -22,6 +22,7 @@ $notifications = json_decode( $fileJSON, true );
 
 	<style>
 		.notification-box {
+			display: none;
 	    background-color: #b7c6cb;
 	    position: fixed;
 	    right: 5px;
@@ -145,13 +146,15 @@ $notifications = json_decode( $fileJSON, true );
 		// check if needs to show notify-box
 		var notificationCookie = getCookie(cookieName);
 
-		if (notificationCookie == null) {
+		console.log(cookieValue + " " + notificationCookie);
+
+		if (notificationCookie == null || notificationCookie != cookieValue) {
       // cookie doesn't exist
       // show notification box
 			$('.notification-box').show();
     }
     else {
-      // cookie exists + not expired
+      // cookie exists + notification hasn't been updated
       // do nothing
     }
 
