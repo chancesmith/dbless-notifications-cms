@@ -26,7 +26,7 @@ function generateUUID(){
 }
 
 dbless.service('mainController', function ($http) {
-    var notifications = '';
+    var notifications = [];
     $http.get('notifications.json').success(function(data) {
         notifications = data;
     });
@@ -35,15 +35,17 @@ dbless.service('mainController', function ($http) {
     //else update the existing object
     this.save = function (notification) {
         // add edit date
-        // var d = new Date();
-        var d = moment().format('MMMM Do YYYY, h:mm:ss a');
+        var d = moment().format('MMMM D YYYY, h:mm:ss a');
         notification.editDate = d;
 
     	if (notification.id == null) {
             //if this is new notification, add it in notifications array
             notification.id = generateUUID();
-            notifications.push(notification);
-            console.log('New notification'+notifications.length);
+            //set limit to 1 notification
+            if (notifications.length < 1) {
+                notifications.push(notification);
+            }
+            console.log('New notification'+ ': ' + notifications.length);
         } else {
             //for existing notification, find this notification using id
             //and update it.

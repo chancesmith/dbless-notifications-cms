@@ -3,23 +3,14 @@
 		<div class="col-md-6">
 			<form class="well" ng-submit="saveNotification()">
 				<div class="form-group">
-					<label>Text*</label>
+					<label>Text *</label>
 					<input type="text" class="form-control" name="text" ng-model="newnotification.text" required/>
 				</div>
 				<div class="form-group">
-					<label>Need a button?</label>
-					<div class="checkbox">
-						<label>
-							<input type="checkbox" id="buttons" name="buttons" ng-model="notifications.buttonBolean" />
-							Yes
-						</label>
-					</div>
-				</div>
-				<div class="form-group" ng-show="notifications.buttonBolean">
 					<label>Button Text</label>
 					<input type="text" class="form-control" name="btn" ng-model="newnotification.btn" />
 				</div>
-				<div class="form-group" ng-show="notifications.buttonBolean">
+				<div class="form-group">
 					<label>URL</label>
 					<input type="text" class="form-control" name="url" ng-model="newnotification.url" />
 				</div>
@@ -35,13 +26,11 @@
 			<div class="notification-box" ng-hide="!notifications.length" ng-repeat="notification in notifications"
 			>
 				<div class="close-notification">X</div>
-				<div class="controls">
-					<a href="javascript:void(0)" ng-click="edit(notification.id)"><i class="fa fa-pencil fa-lg success"></i></a><!--<a href="javascript:void(0)" ng-click="duplicate(notification.id)">dupe</a> --> &nbsp;<a href="javascript:void(0)" ng-click="delete(notification.id)"><i class="fa fa-trash fa-lg error"></i></a>
-				</div>
 				<p>{{ notification.text }}</p> <br>
 				<a ng-show="notification.url != null || notification.btn != null" href="{{ notification.url }}" class="btn btn-primary">{{ notification.btn }}</a>
-				<br><br>
-				{{ notification.editDate }}
+				<div class="controls">
+					<a href="javascript:void(0)" ng-click="edit(notification.id)"><i class="fa fa-pencil fa-lg success"></i></a><!--<a href="javascript:void(0)" ng-click="duplicate(notification.id)">dupe</a> --> &nbsp;<a href="javascript:void(0)" ng-click="delete(notification.id)"><i class="fa fa-trash fa-lg error"></i></a>&nbsp;&nbsp;<strong>Last Edit:</strong> {{ notification.editDate }}
+				</div>
 			</div>
 		</div>
 	</div>

@@ -86,9 +86,7 @@ $notifications = json_decode( $fileJSON, true );
 			<?php $cookieValuePHP = $notification['editDate']; ?>
 		<?php } ?>
 	<?php else: ?>
-		<div class="notification-box">
-			<h2>Sorry, no career opportunities are avilable at this time. Come back later to see future udpates.</h2>
-		</div>
+		<?php // nothing to show ?>
 	<?php endif ?>
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
